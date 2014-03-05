@@ -1,19 +1,19 @@
 #include <iostream>
-using namespace std;
 
+using namespace std;
   
 class Polynomial
 {
 public:
     Polynomial();
     // virtual ~Polynomial();
-    void appendTerm(int, int);
+    void appendTerm(float, int);
     void printTerms();
     Polynomial sum(const Polynomial &other_poly);
 private:
     struct Term
     {
-	int coef;
+	float coef;
 	int exp;
 	Term* link;
     };
@@ -26,7 +26,7 @@ Polynomial::Polynomial()
     head = NULL;
 }
 
-void Polynomial::appendTerm(int coef, int exp)
+void Polynomial::appendTerm(float coef, int exp)
 {
     Term* new_term = new Term;
     new_term->coef = coef;
@@ -89,7 +89,7 @@ Polynomial Polynomial::sum(const Polynomial &other_poly)
 	
 	else // Exponents are equal.
 	{
-	    int new_coef = eq_left->coef + eq_right->coef;
+	    float new_coef = eq_left->coef + eq_right->coef;
 	    int exp = eq_left->exp;
 
 	    eq_left = eq_left->link;
@@ -111,7 +111,7 @@ int main()
 {
     Polynomial p1;
     p1.appendTerm(-2,6);
-    p1.appendTerm(3,4);
+    p1.appendTerm(3.6,4);
     p1.appendTerm(5,3);
     p1.appendTerm(2,1);
     p1.appendTerm(1,0);
@@ -119,7 +119,7 @@ int main()
     Polynomial p2;
     p2.appendTerm(2,6);
     p2.appendTerm(5,5);
-    p2.appendTerm(-1,1);
+    p2.appendTerm(-1.2,1);
     p2.appendTerm(1,0);
 
     Polynomial result = p1.sum(p2);
