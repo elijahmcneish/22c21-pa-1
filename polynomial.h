@@ -5,10 +5,10 @@ class Polynomial
 {
 public:
     Polynomial();
-    // virtual ~Polynomial();
     void appendTerm(float, int);
-    void printTerms();
-    Polynomial sum(const Polynomial &other_poly);
+    void printTerms() const;
+    // Polynomial sum(const Polynomial &other_poly) const;
+    Polynomial sum(const Polynomial &other_poly) const;
 private:
     struct Term
     {

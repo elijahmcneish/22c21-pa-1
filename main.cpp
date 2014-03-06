@@ -4,16 +4,20 @@
 Polynomial create_poly(int);
 
 Polynomial create_poly(int n_deg)
+// Get polynomial terms from user.
 {
     Polynomial poly;
     float coef;
+
     while (n_deg >= 0)
     {
-	std::cout << "x ^ " << n_deg << " coefficient: ";
+	std::cout << "x^" << n_deg << " coefficient: ";
 	std::cin >> coef;
 	poly.appendTerm(coef, n_deg);
 	--n_deg;
     }
+
+    std::cout << std::endl;
     return poly;
 }
 
@@ -28,7 +32,9 @@ int main()
     Polynomial right_eq = create_poly(right_deg);
 
     Polynomial result = left_eq.sum(right_eq);
+    std::cout << "Sum: ";
     result.printTerms();
-
+    std::cout << std::endl;
+    
     return 0;
 }

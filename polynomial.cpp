@@ -1,7 +1,5 @@
 #include <iostream>
 #include "polynomial.h"
-using namespace std;
-  
 
 Polynomial::Polynomial()
 {
@@ -30,33 +28,48 @@ void Polynomial::appendTerm(float coef, int exp)
     
 }
 
-void Polynomial::printTerms()
-// Function for debugging.
+void Polynomial::printTerms() const
+/*
+  Print the polynomial in the form
+  a1x^n + a2x^n-1...
+*/
 {
     Term* cursor = head;
-    for (int i = 1; (cursor != NULL); i++)
+    
+    while (true)
     {
-	cout << "Term #" << i << endl;
-	cout << "Coefficient: " << cursor->coef << endl;
-	cout << "Exponent: " << cursor->exp << endl << endl;
+	switch (cursor->exp) // Handle x^1 and x^0 cases.
+	{
+	case 0:
+	    std::cout << cursor->coef;
+	    break;
+	case 1:
+	    std::cout << cursor->coef << "x";
+	    break;
+	default:
+	    std::cout << cursor->coef << "x^" << cursor->exp;
+	}
+
+	// Get the next term.
 	cursor = cursor->link;
+	if (cursor == NULL) {break;}
+
+	// If another term follows, print the correct operator.
+	char op = '+';
+	if (cursor->coef < 0) { op = '-'; }
+	else if (cursor->coef == 0) { op = '\0'; }
+	std::cout << " " << op << " ";
     }
 }
 
-Polynomial Polynomial::sum(const Polynomial &other_poly)
-// TODO maybe replace sum with operator+
+Polynomial Polynomial::sum(const Polynomial &other_poly) const
 {
-    cout << "#####summing polynomials#####\n\n";
     Polynomial result;
-    /* TODO Need to ensure we can't inadvertently modify origial object.
-       Having problems declaring parameters as const.*/
-    
     Term* eq_left = head;
     Term* eq_right = other_poly.head;
 
     while ((eq_left != NULL) && (eq_right != NULL))
     {
-	cout<< "Left exp: "<< eq_left->exp << " Right exp: " << eq_right->exp << endl;
 	if (eq_left->exp > eq_right->exp)
 	{
 	    result.appendTerm(eq_left->coef, eq_left->exp);
@@ -73,13 +86,10 @@ Polynomial Polynomial::sum(const Polynomial &other_poly)
 	{
 	    float new_coef = eq_left->coef + eq_right->coef;
 	    int exp = eq_left->exp;
-
+	    
 	    eq_left = eq_left->link;
 	    eq_right = eq_right->link;
-	    if (new_coef == 0)
-	    {
-	    	continue;
-	    }
+	    if (new_coef == 0) { continue; }
 
 	    result.appendTerm(new_coef, exp);
 	}
@@ -87,5 +97,3 @@ Polynomial Polynomial::sum(const Polynomial &other_poly)
     
     return result;
 }
-
-
