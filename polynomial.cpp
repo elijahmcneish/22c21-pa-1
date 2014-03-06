@@ -16,6 +16,7 @@
  */
 
 #include <iostream>
+#include <cmath>
 #include "polynomial.h"
 
 Polynomial::Polynomial()
@@ -52,19 +53,25 @@ void Polynomial::printTerms() const
 */
 {
     Term* cursor = head;
-    
+
+        
     while (true)
     {
+	int coef_abs = cursor->coef;
+	if (cursor!=head) // Print '-' if it's in the first term.
+	{
+	    coef_abs = std::abs(coef_abs);
+	}
 	switch (cursor->exp) // Handle x^1 and x^0 cases.
 	{
 	case 0:
-	    std::cout << cursor->coef;
+	    std::cout << coef_abs;
 	    break;
 	case 1:
-	    std::cout << cursor->coef << "x";
+	    std::cout << coef_abs << "x";
 	    break;
 	default:
-	    std::cout << cursor->coef << "x^" << cursor->exp;
+	    std::cout << coef_abs << "x^" << cursor->exp;
 	}
 
 	// Get the next term.
@@ -72,10 +79,10 @@ void Polynomial::printTerms() const
 	if (cursor == NULL) {break;}
 
 	// If another term follows, print the correct operator.
-	char op = '+';
-	if (cursor->coef < 0) { op = '-'; }
-	else if (cursor->coef == 0) { op = '\0'; }
-	std::cout << " " << op << " ";
+	std::string op = " + ";
+	if (cursor->coef < 0) { op = " - "; }
+	else if (cursor->coef == 0) { op = "\0"; }
+	std::cout << op;
     }
 }
 
