@@ -24,7 +24,6 @@ public:
     Polynomial();
     void appendTerm(float, int);
     void printTerms() const;
-    // Polynomial sum(const Polynomial &other_poly) const;
     Polynomial sum(const Polynomial &other_poly) const;
 private:
     struct Term
