@@ -1,4 +1,4 @@
-/* polynomial.cpp
+/* polynomial.h
  * Copyright (c) 2014 Elijah McNeish. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
