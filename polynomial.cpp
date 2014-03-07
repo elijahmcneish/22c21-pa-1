@@ -91,12 +91,11 @@ void Polynomial::printTerms() const
 
 	// Get the next term.
 	cursor = cursor->link;
-	if (cursor == NULL) {break;}
+	if (cursor == NULL) { break; }
 
 	// If another term follows, print the correct operator.
 	std::string op = " + ";
 	if (cursor->coef < 0) { op = " - "; }
-	else if (cursor->coef == 0) { op = ""; }
 	std::cout << op;
     }
 }
