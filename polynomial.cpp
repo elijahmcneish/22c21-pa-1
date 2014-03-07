@@ -16,7 +16,6 @@
  */
 
 #include <iostream>
-// #include <cmath>
 #include <string>
 #include <sstream>
 #include "polynomial.h"
@@ -59,12 +58,7 @@ void Polynomial::printTerms() const
         
     while (true)
     {
-	// int coef = cursor->coef;
-	// if (cursor!=head) // Print '-' if it's in the first term.
-	// {
-	//     coef = std::abs(coef);
-	// }
-
+	// Convert coefficient to string.
 	std::string coef;
 	std::stringstream ss;
 	ss << cursor->coef;
