@@ -16,7 +16,9 @@
  */
 
 #include <iostream>
-#include <cmath>
+// #include <cmath>
+#include <string>
+#include <sstream>
 #include "polynomial.h"
 
 Polynomial::Polynomial()
@@ -57,21 +59,40 @@ void Polynomial::printTerms() const
         
     while (true)
     {
-	int coef_abs = cursor->coef;
-	if (cursor!=head) // Print '-' if it's in the first term.
+	// int coef = cursor->coef;
+	// if (cursor!=head) // Print '-' if it's in the first term.
+	// {
+	//     coef = std::abs(coef);
+	// }
+
+	std::string coef;
+	std::stringstream ss;
+	ss << cursor->coef;
+	coef = ss.str();
+
+	// Print '-' only if leading term is negative.
+	if ((cursor != head) && (cursor->coef < 0))
 	{
-	    coef_abs = std::abs(coef_abs);
+	    coef = coef.substr(1, -1);
 	}
-	switch (cursor->exp) // Handle x^1 and x^0 cases.
+
+	// Only display '1' coefficient if it's the constant term.
+	if ((coef == "1") && (cursor->exp != 0))
+	{ coef = ""; }
+	else if ((coef == "-1") && (cursor->exp != 0))
+	{ coef = "-"; }
+	
+	// Handle x^1 and x^0 cases.
+	std::cout << coef;
+	switch (cursor->exp)
 	{
 	case 0:
-	    std::cout << coef_abs;
 	    break;
 	case 1:
-	    std::cout << coef_abs << "x";
+	    std::cout << "x";
 	    break;
 	default:
-	    std::cout << coef_abs << "x^" << cursor->exp;
+	    std::cout << "x^" << cursor->exp;
 	}
 
 	// Get the next term.
@@ -81,7 +102,7 @@ void Polynomial::printTerms() const
 	// If another term follows, print the correct operator.
 	std::string op = " + ";
 	if (cursor->coef < 0) { op = " - "; }
-	else if (cursor->coef == 0) { op = "\0"; }
+	else if (cursor->coef == 0) { op = ""; }
 	std::cout << op;
     }
 }
