@@ -50,7 +50,7 @@ void Polynomial::appendTerm(float coef, int exp)
 void Polynomial::printTerms() const
 /*
   Print the polynomial in the form
-  a1x^n + a2x^n-1...
+  anx^n + ... + a2x^2 + a1x + a0.
 */
 {
     Term* cursor = head;
